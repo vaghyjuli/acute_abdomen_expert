@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <head>
+    <title>Acute Abdomen Expert System</title>
+    <link rel="icon" type="image/x-icon" href="https://cdn.glitch.global/bba37a59-0fc4-44da-9c5f-d107b04469d5/favicon.ico?v=1642606257474">
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Caudex"
+      rel="stylesheet"
+    />
+  </head>
+  
+  <body>
+    <div class="split-left" id="SplitLeft">
+      <h2 class="page-title">Acute Abdomen Expert System</h2>
+      <div class="wrapper-center">
+        <div class="loader" id="loader"></div>
+        <div class="box" id="welcome-box">
+          <h3 class="welcome-header">Welcome!</h3>
+          <p class="question">Is your patient experiencing sudden and severe abdominal pain?
+            Then this system could help you find out what the next step in their treatment should be.
+            Press the button below if you wish to proceed. </p>
+          <button class="btn" id="start-button">Start System</button>
+        </div>
+        <div class="box" id="question-box">
+          <div class="question"><h3 id="question"></h3></div>
+          <div class="buttons">
+            <p id="answer-buttons"></p>
+          </div>
+          <p id="reset-button"></p>
+          <p id="analysis-button"></p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="split-right" id="SplitRight">
+      <div class="trace-section">
+        <h3>Inferred Facts</h3>
+        <ul class="trace-text-div" id="inferred-facts"></ul>
+      </div>
+      <div class="trace-section">
+        <h3>Rule Analysis</h3>
+        <ol class="trace-text-div" id="rule-analysis"></ol>
+      </div>
+    </div>
+    
+    <script type="module" src="js/main.js"></script>
+  </body>
+</html>
