@@ -1,0 +1,1098 @@
+<?xml version="1.0"?>
+<knowledge>
+	<title>Acute Abdomen Medical Recommendation</title>
+	<description>The knowledge base gives a recommendation on how to further proceed in case of a patient suffering from acute abdominal pain.</description>
+  
+  <goal name="medical-recommendation">
+    <description>Recommendation based on symptoms:</description>
+    <answer value="emergency-cardiology-consultation"><![CDATA[The patient requires emergency cardiology consultation. Some cardiovascular diseases can manifest with symptoms such as abdominal pain, nausea and gastroesophageal reflux.]]></answer>
+    <answer value="exclude-lactic-acidosis"><![CDATA[The patient requires emergency medical consultation for exclusion of lactic acidosis. The clinical picture for acidosis can be similar to some symptoms of acute abdomen. The arterial blood gas analysis is the medical test that is used to exclude this diagnosis.]]></answer>
+    <answer value="transfer-to-gynecology"><![CDATA[The patient should be transferred to the gynecology department. The possible causes do not fall under the scope of ER, the patient might be pregnant.]]></answer>
+    <answer value="surgery-now"><![CDATA[The patient requires emergency surgery. Surgery should be performed now due to risk of additional complications and death if intervention is postponed.]]></answer>
+    <answer value="emergency-urology-consult"><![CDATA[Try to reduce testicular torsion manually and transfer to urology for emergency consultation. It is very important to try and reduce the testicular torsion, because the chance of the organ to stay vital decreases as long as the spermatic cord stays twisted.]]></answer>
+    <answer value="treatment-according-to-sono"><![CDATA[Perform surgery indicated by abdominal sonography. When the patient goes through an abdominal ultrasound, there are important findings that lead to emergency surgery. The abdominal ultrasound should only be performed by well-trained professionals, which are able to identify specific marks.]]></answer>
+    <answer value="surgery-today"><![CDATA[The patient needs urgent surgery (today).]]></answer>
+    <answer value="surgery-tomorrow"><![CDATA[The patient needs surgery that is not urgent (can be performed tomorrow). There are emergency surgical situations that can be postponed. The treatment starts with electrolyte medications, antibiotics and analgesia. This way the patient is prepared for surgery and is in better condition due to the treatment than when they were admitted.]]></answer>
+    <answer value="hospitalization"><![CDATA[The patient needs to be hospitalized and kept under surveillance. The patient is kept under surveillance in order to trace the development of the clinical picture. That way if there are complications or progression of their condition, the medical staff can react fast and adequate.]]></answer>
+    <answer value="dismiss"><![CDATA[The patient can be dismissed. Follow up in 24-48 h to check the state of the patient.]]></answer>
+  </goal>
+  
+  <rule>
+    <description>If the patient is experiencing upper abdominal pain, then an ECG should be performed and the troponin I level should be checked.</description>
+    <if>
+      <fact name="upper-abdominal-pain">yes</fact>
+    </if>
+    <then>
+      <fact name="perform-ecg">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the ECG and troponin I check indicate ST elevation or posterior wall infarction, an emergency cardiology consultation is required.</description>
+    <if>
+      <and>
+        <fact name="perform-ecg">yes</fact>
+        <or>
+          <fact name="st-elevation">yes</fact>
+          <fact name="post-wall-infarction">yes</fact>
+        </or>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">emergency-cardiology-consultation</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the patient is not experiencing upper abdominal pain, then blood glucose and lactate should be checked.</description>
+    <if>
+      <or>
+        <fact name="upper-abdominal-pain">no</fact>
+        <and>
+          <fact name="upper-abdominal-pain">yes</fact>
+          <fact name="st-elevation">no</fact>
+          <fact name="post-wall-infarction">no</fact>
+        </and>
+      </or>
+    </if>
+    <then>
+      <fact name="perform-basic-lab">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the blood glucose and lactate are increased, the patient requires an emergency medical consultation to exclude lactic acidosis.</description>
+    <if>
+      <and>
+        <fact name="perform-basic-lab">yes</fact>
+        <and>
+          <fact name="increased-blood-glucose">yes</fact>
+          <fact name="increased-lactate">yes</fact>
+        </and>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">exclude-lactic-acidosis</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If either blood glucose and lactate are normal and the patient is female, then beta-hCG should be checked.</description>
+    <if>
+      <and>
+        <fact name="perform-basic-lab">yes</fact>
+        <or>
+          <fact name="increased-blood-glucose">no</fact>
+          <fact name="increased-lactate">no</fact>
+        </or>
+        <fact name="female">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="check-beta-hcg">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the patient tests positive for beta-hCG, a gynecologist should get involved.</description>
+    <if>
+      <and>
+        <fact name="check-beta-hcg">yes</fact>
+        <fact name="pos-beta-hcg">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="involve-gynecology">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the patient tests negative for beta-hCG, continue exploring non-gynecology causes.</description>
+    <if>
+      <and>
+        <fact name="check-beta-hcg">yes</fact>
+        <fact name="pos-beta-hcg">no</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="involve-gynecology">no</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the specialist suspects a gynecological issue, the patient should be transferred to gynecology.</description>
+    <if>
+      <and>
+        <fact name="involve-gynecology">yes</fact>
+        <fact name="gynecological-issue">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">transfer-to-gynecology</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the patient is a male or is female with no gynecological issue, then check signs of shock, bleeding or whether the vital signs are critical.</description>
+    <if>
+      <and>
+        <fact name="perform-basic-lab">yes</fact>
+        <or>
+          <fact name="increased-blood-glucose">no</fact>
+          <fact name="increased-lactate">no</fact>
+        </or>
+        <or>
+          <fact name="female">no</fact>
+          <and>
+            <fact name="female">yes</fact>
+            <or>
+              <fact name="involve-gynecology">no</fact>
+              <fact name="gynecological-issue">no</fact>
+            </or>
+          </and>
+        </or>
+      </and>
+    </if>
+    <then>
+      <fact name="check-vitals">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the patient is exhibiting signs of shock, bleeding or critical vital signs, activate resuscitation room.</description>
+    <if>
+      <and>
+        <fact name="check-vitals">yes</fact>
+        <or>
+          <fact name="shock">yes</fact>
+          <fact name="bleeding">yes</fact>
+          <fact name="critical-vital-signs">yes</fact>
+        </or>
+      </and>
+    </if>
+    <then>
+      <fact name="activate-resuscitation-room">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the patient cannot be stabilized, perform emergency surgery.</description>
+    <if>
+      <and>
+        <fact name="activate-resuscitation-room">yes</fact>
+        <fact name="unable-to-stabilize">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">surgery-now</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the patient can be stabilized, consider additional imaging.</description>
+    <if>
+      <and>
+        <fact name="activate-resuscitation-room">yes</fact>
+        <fact name="unable-to-stabilize">no</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="consider-imaging">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If additional imaging is required, perform abdomen CT with 
+      intravenous contrast and CT angiography.</description>
+    <if>
+      <and>
+        <fact name="consider-imaging">yes</fact>
+        <fact name="need-for-imaging">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="perform-ct">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If additional imaging is not required, determine whether issue might require surgery.</description>
+    <if>
+      <and>
+        <fact name="consider-imaging">yes</fact>
+        <fact name="need-for-imaging">no</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="perform-ct">no</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If additional imaging is not required and there is an indication for surgery, check surgery urgency. If urgent, perform surgery today.</description>
+    <if>
+      <and>
+        <fact name="perform-ct">no</fact>
+        <fact name="surgery-indication">yes</fact>
+        <fact name="urgent-surgery">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">surgery-today</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If additional imaging is not required and there is an indication for surgery, check surgery urgency. If not urgent, perform surgery tomorrow.</description>
+    <if>
+      <and>
+        <fact name="perform-ct">no</fact>
+        <fact name="surgery-indication">yes</fact>
+        <fact name="urgent-surgery">no</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">surgery-tomorrow</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the patient's vitals are normal, consider potential obstruction.</description>
+    <if>
+      <and>
+        <fact name="check-vitals">yes</fact>
+        <and>
+          <fact name="shock">no</fact>
+          <fact name="bleeding">no</fact>
+          <fact name="critical-vital-signs">no</fact>
+        </and>
+      </and>
+    </if>
+    <then>
+      <fact name="check-obstruction">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If there are signs of obstruction, check if patient needs a GI tube.</description>
+    <if>
+      <and>
+        <fact name="check-obstruction">yes</fact>
+        <fact name="obstruction">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="might-need-gi-tube">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If there are no signs of obstruction, consider other causes.</description>
+    <if>
+      <and>
+        <fact name="check-obstruction">yes</fact>
+        <fact name="obstruction">no</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="might-need-gi-tube">no</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>Check if patient is vomiting or has hiccups. If either is true, insert GI tube.</description>
+    <if>
+      <and>
+        <fact name="might-need-gi-tube">yes</fact>
+        <or>
+          <fact name="vomiting">yes</fact>
+          <fact name="hiccups">yes</fact>
+        </or>
+      </and>
+    </if>
+    <then>
+      <fact name="needs-gi-tube">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>Check if patient is vomiting or has hiccups. If both are false, patient does not need a GI tube.</description>
+    <if>
+      <and>
+        <fact name="might-need-gi-tube">yes</fact>
+        <and>
+          <fact name="vomiting">no</fact>
+          <fact name="hiccups">no</fact>
+        </and>
+      </and>
+    </if>
+    <then>
+      <fact name="needs-gi-tube">no</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If there are no signs of obstruction or if the patient is not vomiting/having hiccups or if a GI tube has already been inserted, consider peritonism.</description>
+    <if>
+      <or>
+        <fact name="might-need-gi-tube">no</fact>
+        <fact name="needs-gi-tube">no</fact>
+        <fact name="needs-gi-tube">yes</fact>
+      </or>
+    </if>
+    <then>
+      <fact name="check-peritonism">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If there are signs of peritonism, check signs of sepsis or ischemia.</description>
+    <if>
+      <and>
+        <fact name="check-peritonism">yes</fact>
+        <fact name="peritonism">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="check-sepsis-ischemia">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If there are no signs of peritonism, check signs of generalized peritonitis.</description>
+    <if>
+      <and>
+        <fact name="check-peritonism">yes</fact>
+        <fact name="peritonism">no</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="check-gen-peritonitis">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If there are signs of generalized peritonitis, check signs of sepsis or ischemia.</description>
+    <if>
+      <and>
+        <fact name="check-gen-peritonitis">yes</fact>
+        <fact name="generalized-peritonitis">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="check-sepsis-ischemia">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If there are no signs of generalized peritonitis and the patient is male,
+      check testicular torsion.</description>
+    <if>
+      <and>
+        <fact name="check-gen-peritonitis">yes</fact>
+        <fact name="generalized-peritonitis">no</fact>
+        <fact name="female">no</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="check-testicular-torsion">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If there are no signs of generalized peritonitis and the patient is female,
+      check signs of sepsis or ischemia.</description>
+    <if>
+      <and>
+        <fact name="check-gen-peritonitis">yes</fact>
+        <fact name="generalized-peritonitis">no</fact>
+        <fact name="female">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="check-sepsis-ischemia">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If there are signs of sepsis or ischemia, consider additional imaging.</description>
+    <if>
+      <and>
+        <fact name="check-sepsis-ischemia">yes</fact>
+        <or>
+          <fact name="sepsis">yes</fact>
+          <fact name="ischemia">yes</fact>
+        </or>
+      </and>
+    </if>
+    <then>
+      <fact name="consider-imaging">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If there are no signs of sepsis or ischemia, check testicular torsion.</description>
+    <if>
+      <and>
+        <fact name="female">no</fact>
+        <fact name="check-sepsis-ischemia">yes</fact>
+        <and>
+          <fact name="sepsis">no</fact>
+          <fact name="ischemia">no</fact>
+        </and>
+      </and>
+    </if>
+    <then>
+      <fact name="check-testicular-torsion">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If there are signs of testicular torsion, the
+      patient requires an emergency urology consult.</description>
+    <if>
+      <and>
+        <fact name="check-testicular-torsion">yes</fact>
+        <fact name="female">no</fact>
+        <fact name="testicular-torsion">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">emergency-urology-consult</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If there are no signs of testicular torsion or if the patient is female, 
+      perform abdominal sonography.</description>
+    <if>
+      <or>
+        <and>
+          <fact name="female">yes</fact>
+          <fact name="check-sepsis-ischemia">yes</fact>
+          <fact name="sepsis">no</fact>
+          <fact name="ischemia">no</fact>
+        </and>
+        <and>
+          <fact name="check-testicular-torsion">yes</fact>
+          <fact name="testicular-torsion">no</fact>
+        </and>
+      </or>
+    </if>
+    <then>
+      <fact name="abdominal-sono">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the results of the abdominal sonography are clear, perform
+      surgery accordingly.</description>
+    <if>
+      <and>
+        <fact name="abdominal-sono">yes</fact>
+        <fact name="unclear-sono">no</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">treatment-according-to-sono</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the results of the abdominal sonography are unclear and the
+      patient is female, consult gynecology.</description>
+    <if>
+      <and>
+        <fact name="abdominal-sono">yes</fact>
+        <fact name="unclear-sono">yes</fact>
+        <fact name="female">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="involve-gynecology">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the results of the abdominal sonography are unclear and the
+      patient is male or is a female with no gynecological issue, 
+      check for risk factors for surgical abdomen.</description>
+    <if>
+      <and>
+        <fact name="abdominal-sono">yes</fact>
+        <fact name="unclear-sono">yes</fact>
+        <or>
+          <fact name="female">no</fact>
+          <and>
+            <fact name="gynecological-issue">no</fact>
+            <fact name="female">yes</fact>
+          </and>
+        </or>
+      </and>
+    </if>
+    <then>
+      <fact name="check-risk-factors">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If risk factors can be identified for the patient, perform
+      abdomen CT with intravenous contrast and CT angiography.</description>
+    <if>
+      <and>
+        <fact name="check-risk-factors">yes</fact>
+        <fact name="risk-factors">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="perform-ct">yes</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the performed CTs do not indicate surgery, hospitalize
+      patient.</description>
+    <if>
+      <and>
+        <fact name="perform-ct">no</fact>
+        <or>
+          <fact name="surgery-indication">no</fact>
+          <fact name="surgery-indication-ct">no</fact>
+        </or>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">hospitalization</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the performed CTs serve as indication for surgery, assess urgency
+      of surgery. If the surgery is urgent, perform surgery today.</description>
+    <if>
+      <and>
+        <fact name="perform-ct">yes</fact>
+        <fact name="surgery-indication-ct">yes</fact>
+        <fact name="urgent-surgery">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">surgery-today</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the performed CTs serve as indication for surgery, assess urgency
+      of surgery. If the surgery is not urgent, perform surgery tomorrow.</description>
+    <if>
+      <and>
+        <fact name="perform-ct">yes</fact>
+        <fact name="surgery-indication-ct">yes</fact>
+        <fact name="urgent-surgery">no</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">surgery-tomorrow</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If the performed CTs do not serve as indication for surgery, hospitalize patient.</description>
+    <if>
+      <and>
+        <fact name="perform-ct">yes</fact>
+        <fact name="surgery-indication-ct">no</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">hospitalization</fact>
+    </then>
+  </rule>
+  
+  
+  <rule>
+    <description>If no risk factors can be identified for the patient, 
+      consider non-specific abdominal pain. If non-specific pain
+      is suspected and the patient satisfies the conditions for dismissal, 
+      dismiss patient and do a follow-up consultation.</description>
+    <if>
+      <and>
+        <fact name="check-risk-factors">yes</fact>
+        <fact name="risk-factors">no</fact>
+        <fact name="dismissal">yes</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">dismiss</fact>
+    </then>
+  </rule>
+  
+  <rule>
+    <description>If no risk factors can be identified for the patient, 
+      consider non-specific abdominal pain. If non-specific pain is
+      suspected and the patient does not satisfy the conditions for dismissal,
+      hospitalize patient.</description>
+    <if>
+      <and>
+        <fact name="check-risk-factors">yes</fact>
+        <fact name="risk-factors">no</fact>
+        <fact name="dismissal">no</fact>
+      </and>
+    </if>
+    <then>
+      <fact name="medical-recommendation">hospitalization</fact>
+    </then>
+  </rule>
+  
+  <question>
+		<description>Is the patient experiencing upper abdominal pain?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="upper-abdominal-pain">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="upper-abdominal-pain">no</fact>
+			</then>
+		</option>
+	</question>
+
+	<question>
+		<description>Does the ECG indicate ST elevation?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="st-elevation">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="st-elevation">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Does the ECG indicate posterior wall infarction?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="post-wall-infarction">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="post-wall-infarction">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Is the blood glucose level increased?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="increased-blood-glucose">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="increased-blood-glucose">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Is the lactate level increased?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="increased-lactate">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="increased-lactate">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Is the patient female?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="female">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="female">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Did the patient test positive for beta-hCG?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="pos-beta-hcg">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="pos-beta-hcg">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>The patient has gotten a consult from gynecology.
+      Does the specialist suspect a gynecological issue?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="gynecological-issue">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="gynecological-issue">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Is the patient in shock?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="shock">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="shock">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Are there signs of bleeding?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="bleeding">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="bleeding">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Are the vital signs critical?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="critical-vital-signs">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="critical-vital-signs">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Are you unable to stabilize patient?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="unable-to-stabilize">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="unable-to-stabilize">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Is there an indication that life-saving surgery should be performed?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="life-saving-surgery">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="life-saving-surgery">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Are there signs of obstruction?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="obstruction">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="obstruction">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Is the patient vomiting?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="vomiting">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="vomiting">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Does the patient have hiccups?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="hiccups">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="hiccups">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Are there signs of peritonism?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="peritonism">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="peritonism">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Are there signs of generalized peritonitis?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="generalized-peritonitis">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="generalized-peritonitis">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Are there signs of sepsis?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="sepsis">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="sepsis">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Are there signs of ischemia?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="ischemia">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="ischemia">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Is there an individual need for imaging?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="need-for-imaging">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="need-for-imaging">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Is there testicular torsion?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="testicular-torsion">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="testicular-torsion">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>You have performed an abdominal sonography. Is the abdominal 
+      sonography unclear or negative?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="unclear-sono">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="unclear-sono">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Is there any indication for surgery?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="surgery-indication">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="surgery-indication">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>You have performed an abdomen CT with intravenous contrast and a CT angiography.
+      Is there any indication for surgery?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="surgery-indication-ct">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="surgery-indication-ct">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Is the surgery urgent?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="urgent-surgery">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="urgent-surgery">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>Are there risk factors for surgical abdomen?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="risk-factors">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="risk-factors">no</fact>
+			</then>
+		</option>
+	</question>
+  
+  <question>
+		<description>The pain is most likely not a specific abdominal emergency.
+      Does the patient satisfy the conditions to be dismissed?</description>
+		<option>
+			<description>Yes</description>
+			<then>
+				<fact name="dismissal">yes</fact>
+			</then>
+		</option>
+		<option>
+			<description>No</description>
+			<then>
+				<fact name="dismissal">no</fact>
+			</then>
+		</option>
+	</question>
+</knowledge>

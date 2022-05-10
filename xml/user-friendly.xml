@@ -1,0 +1,775 @@
+<knowledge>
+  <user-friendly>
+    <if>
+      <fact name="upper-abdominal-pain">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>upper abdominal pain</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="upper-abdominal-pain">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no upper abdominal pain</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="perform-ecg">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>ECG needed</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="perform-ecg">no</fact>
+    </if>
+    <then>
+      <friendly-fact>ECG not needed</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="st-elevation">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>ST elevation</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="st-elevation">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no ST elevation</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="post-wall-infarction">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>posterior myocardial infarction</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="post-wall-infarction">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no posterior myocardial infarction</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="perform-basic-lab">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>check blood glucose and lactate</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="perform-basic-lab">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no need to check blood glucose and lactate</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="increased-blood-glucose">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>increased blood glucose level</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="increased-blood-glucose">no</fact>
+    </if>
+    <then>
+      <friendly-fact>normal blood glucose level</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="increased-lactate">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>increased lactate level</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="increased-lactate">no</fact>
+    </if>
+    <then>
+      <friendly-fact>normal lactate level</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="female">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>female patient</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="female">no</fact>
+    </if>
+    <then>
+      <friendly-fact>male patient</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="check-beta-hcg">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>check beta-hCG</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="check-beta-hcg">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no need to check beta-hCG</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="pos-beta-hcg">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>patient is likely pregnant</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="pos-beta-hcg">no</fact>
+    </if>
+    <then>
+      <friendly-fact>patient is not pregnant</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="involve-gynecology">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>gynecological opinion needed</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="involve-gynecology">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no gynecological opinion needed</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="gynecological-issue">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>gynecological issue</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="gynecological-issue">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no gynecological issue</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="check-vitals">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>check vital signs, signs of shock or bleeding</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="check-vitals">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no need to check vital signs, signs of shock or bleeding</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="shock">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>signs of shock</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="shock">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no signs of shock</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="bleeding">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>signs of bleeding</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="bleeding">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no signs of bleeding</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="critical-vital-signs">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>critical vital signs</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="critical-vital-signs">no</fact>
+    </if>
+    <then>
+      <friendly-fact>normal vital signs</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="activate-resuscitation-room">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>activate resuscitation room</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="activate-resuscitation-room">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no need to activate resuscitation room</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="unable-to-stabilize">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>patient cannot be stabilized</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="unable-to-stabilize">no</fact>
+    </if>
+    <then>
+      <friendly-fact>patient is stable</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="consider-imaging">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>additional imaging might be needed</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="consider-imaging">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no indication of needing additional imaging</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="need-for-imaging">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>additional imaging is needed</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="need-for-imaging">no</fact>
+    </if>
+    <then>
+      <friendly-fact>additional imaging not needed</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="perform-ct">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>perform abdomen CT with intravenous contrast and CT angiography</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="perform-ct">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no CT needed</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="surgery-indication">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>surgery indication</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="surgery-indication">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no surgery indication</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="urgent-surgery">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>urgent surgery needed</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="urgent-surgery">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no need for urgent surgery</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="check-obstruction">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>check obstruction</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="check-obstruction">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no need to check obstruction</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="might-need-gi-tube">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>check if patient needs a GI tube</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="might-need-gi-tube">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no need to check if patient needs GI tube</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="needs-gi-tube">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>insert GI tube</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="needs-gi-tube">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no need to insert GI tube</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="vomiting">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>vomiting</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="vomiting">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no vomiting</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="hiccups">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>hiccups</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="hiccups">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no hiccups</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="check-peritonism">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>check for local peritonitis</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="check-peritonism">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no indication of local peritonitis</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="check-sepsis-ischemia">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>check for sepsis or ischemia</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="check-sepsis-ischemia">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no need to check for sepsis or ischemia</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="peritonism">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>local peritonitis</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="peritonism">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no local peritonitis</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="check-gen-peritonitis">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>check for generalized peritonitis</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="check-gen-peritonitis">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no indication of generalized peritonitis</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="generalized-peritonitis">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>generalized peritonitis</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="generalized-peritonitis">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no generalized peritonitis</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="check-testicular-torsion">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>check testicular torsion</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="check-testicular-torsion">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no indication of testicular torsion</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="sepsis">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>sepsis</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="sepsis">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no sepsis</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="ischemia">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>ischemia</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="ischemia">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no ischemia</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="testicular-torsion">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>testicular torsion</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="testicular-torsion">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no testicular torsion</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="abdominal-sono">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>perform abdominal ultrasound</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="abdominal-sono">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no need to perform abdominal ultrasound</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="unclear-sono">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>unclear ultrasound</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="unclear-sono">no</fact>
+    </if>
+    <then>
+      <friendly-fact>clear ultrasound</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="check-risk-factors">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>check risk factors of surgical abdomen</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="check-risk-factors">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no need to check risk factors of surgical abdomen</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="risk-factors">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>risk factors of surgical abdomen</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="risk-factors">no</fact>
+    </if>
+    <then>
+      <friendly-fact>no risk factors for surgical abdomen</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="surgery-indication-ct">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>CT indicates need for surgery</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="surgery-indication-ct">no</fact>
+    </if>
+    <then>
+      <friendly-fact>CT does not indicate need for surgery</friendly-fact>
+    </then>
+  </user-friendly>
+
+  <user-friendly>
+    <if>
+      <fact name="dismissal">yes</fact>
+    </if>
+    <then>
+      <friendly-fact>dismissal possible</friendly-fact>
+    </then>
+  </user-friendly>
+  
+  <user-friendly>
+    <if>
+      <fact name="dismissal">no</fact>
+    </if>
+    <then>
+      <friendly-fact>dismissal not possible</friendly-fact>
+    </then>
+  </user-friendly>
+</knowledge>
